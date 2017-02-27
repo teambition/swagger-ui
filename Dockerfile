@@ -2,7 +2,7 @@ FROM alpine:3.4
 
 MAINTAINER Roman Tarnavski
 
-RUN apk add --update nginx
+RUN apk add --update nginx-lua
 RUN mkdir -p /run/nginx
 
 COPY nginx.conf /etc/nginx/

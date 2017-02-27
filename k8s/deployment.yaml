@@ -1,0 +1,34 @@
+kind: Deployment
+apiVersion: extensions/v1beta1
+metadata:
+  namespace: swagger-ui
+  name: swagger-ui-deployment
+spec:
+  replicas: 1
+  template:
+    metadata:
+      name: swagger-ui-pod
+      labels:
+        app: swagger-ui
+    spec:
+      containers:
+      - name: swagger-ui
+        image: docker-registry.teambition.net/tools/swagger-ui:latest
+        env:
+        - name: SWAGGER_PROJECT
+          value: soa
+        ports:
+        - containerPort: 8080
+          name: swagger-ui
+        volumeMounts:
+        - mountPath: /usr/share/nginx/html/docs
+          name: docs
+        resources:
+          limits:
+            memory: "500Mi"
+            cpu: "100m"
+        imagePullPolicy: Always
+      volumes:
+      - name: docs
+        hostPath:
+          path: /teambition/docs

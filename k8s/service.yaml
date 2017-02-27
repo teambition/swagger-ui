@@ -1,0 +1,16 @@
+kind: Service
+apiVersion: v1
+metadata:
+  namespace: swagger-ui
+  name: swagger-ui-service
+  labels:
+    app: swagger-ui
+spec:
+  type: NodePort
+  ports:
+  - port: 8080
+    protocol: TCP
+    targetPort: 8080
+    nodePort: 30006
+  selector:
+    app: swagger-ui
