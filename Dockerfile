@@ -1,12 +1,14 @@
 FROM alpine:3.4
 
-MAINTAINER Roman Tarnavski
+MAINTAINER fehguy
 
 RUN apk add --update nginx-lua
 RUN mkdir -p /run/nginx
 
 COPY nginx.conf /etc/nginx/
-ADD ./dist/ /usr/share/nginx/html
+
+# copy swagger files to the `/js` folder
+ADD ./dist/* /usr/share/nginx/html/
 
 EXPOSE 8080
 
